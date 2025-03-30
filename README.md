@@ -1,2 +1,12 @@
-# VAE-GAN
-This repository tackles object segmentation and detection using deep learning. It implements Tri-VAE for MRI Tumor Detection and Adversarial Attack Generation with AdvGAN on ResNet-20.
+# MRI Tumor Detection and Adversarial Attack Generation
+
+Below is an overview of each part of the project.
+
+## Part 1: MRI Tumor Detection Using Triplet Variational Autoencoder (Tri-VAE)
+
+In this part, a Triplet Variational Autoencoder (Tri-VAE) is developed to detect anomalies in brain MRI scans. The model is designed to learn a compact representation of healthy brain images from the IXI dataset and then identify abnormal regions corresponding to tumors in BraTS images by analyzing reconstruction errors. Inspired by the paper "Triplet Variational Autoencoder for Unsupervised Anomaly Detection in Brain MRI" (refer to [CVPRW 2024 paper](https://openaccess.thecvf.com/content/CVPR2024W/VAND/papers/Wijanarko_Tri-VAE_Triplet_Variational_Autoencoder_for_Unsupervised_Anomaly_Detection_in_Brain_CVPRW_2024_paper.pdf)), the architecture leverages triplet loss by processing an anchor (a healthy image), a positive sample (a healthy image without noise), and a negative sample (a healthy image with added coarse noise). The model includes mechanisms for coarse and full-scale reconstruction, and integrates losses such as L1 loss, KL Divergence, triplet loss, and SSIM loss to guide training. The final evaluation is based on comparing reconstruction errors, using metrics like the Dice score, to assess the quality of tumor detection across different MRI slices.
+
+## Part 2: Adversarial Attack Generation with AdvGAN
+
+The second part of the project focuses on generating adversarial examples using the AdvGAN framework. The goal is to produce subtle perturbations on images that can mislead a deep learning model while remaining visually imperceptible. This approach is based on the AdvGAN methodology outlined in the paper "AdvGAN: Generating Adversarial Examples via Generative Adversarial Networks" (refer to [AdvGAN paper](https://arxiv.org/abs/1801.02610)). In this implementation, the CIFAR-10 dataset is used along with a pre-trained ResNet-20 model as the target classifier. The AdvGAN model is composed of a generator network that creates adversarial perturbations and a discriminator network that ensures the modified images remain close to the original distribution. The performance is evaluated by measuring the attack success rate, analyzing changes in the model’s accuracy, and visually comparing the adversarial examples with the original images. This part highlights the vulnerability of deep neural networks to adversarial attacks and demonstrates how generative models can be employed to craft effective adversarial examples.
+
